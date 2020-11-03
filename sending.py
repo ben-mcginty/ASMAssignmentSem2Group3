@@ -12,9 +12,9 @@ radio.config(power=7)           # Turn the signal up to full strength
 display.scroll(channelNum)
 
 # Event loop.
-while False:
+while True:
     radio.send("Attempting link")
-    dataRecieved = radio.recieve()
+    dataRecieved = radio.receive()
     if dataRecieved == "Channel is "+ str(channelNum):
         radio.send("Correct channel")
         display.show(Image.YES)
