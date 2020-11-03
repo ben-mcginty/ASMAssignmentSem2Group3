@@ -4,19 +4,18 @@
 from microbit import *
 import radio
 import random
-
-channel = random.randrange(1,100,0)
 radio.on()
-radio.config(channel=channel)        # Choose your own channel number
+channelNum = random.randrange(1,100)
+radio.config(channel=channelNum)        # Choose your own channel number
 radio.config(power=7)           # Turn the signal up to full strength
 
-display.scroll(channel)
+display.scroll(channelNum)
 
 # Event loop.
-for i in channel:
+while False:
     radio.send("Attempting link")
     dataRecieved = radio.recieve()
-    if dataRecieved == "Channel is "+ str(channel):
+    if dataRecieved == "Channel is "+ str(channelNum):
         radio.send("Correct channel")
         display.show(Image.YES)
         break
