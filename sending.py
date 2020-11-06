@@ -3,20 +3,22 @@
 
 from microbit import *
 import radio
-import random
 
-channel = random.randrange(1,100,0)
 radio.on()
-radio.config(channel=channel)
+channelNum = 0                          
+radio.config(channel=channelNum)
 radio.config(power=7)
+channelConnected = False
 
-display.scroll(channel)
-
-# Event loop.
-for i in channel:
-    radio.send("Attempting link")
-    dataRecieved = radio.receive()
-    if dataRecieved == "Connected":
-        radio.send("Correct channel")
+while channelConnected == False:
+    message = radio.receive()
+    print(str(channelNum))
+    if message == "Attempting link":
+        channelConnected = True
+        radio.send("Connected")
         display.show(Image.YES)
-        break
+    elif channelNum != 83:
+        channelNum += 1
+        radio.config(channel=channelNum)
+    else:
+        channelNum = 0
