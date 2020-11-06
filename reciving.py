@@ -4,18 +4,21 @@
 from microbit import *
 import radio
 
-radio.on()                           # Turns on radio
-channel = 0                          
-radio.config(channel=channel)              # Choose your own channel number
-radio.config(power=7)                # Turn the signal up to full strength
+radio.on()
+channelNum = 0                          
+radio.config(channel=channelNum)
+radio.config(power=7)
 channelConnected = False
 
 while channelConnected == False:
-    recieve = radio.recieve()
-    if recieve == "Attempting link":
+    message = radio.receive()
+    print(str(channelNum))
+    if message == "Attempting link":
         channelConnected = True
-        radio.send("Channel is "+ str(channel))
+        radio.send("Connected")
         display.show(Image.YES)
+    elif channelNum != 83:
+        channelNum += 1
+        radio.config(channel=channelNum)
     else:
-        channel += 1
-        radio.config(channel=channel)
+        channelNum = 0
