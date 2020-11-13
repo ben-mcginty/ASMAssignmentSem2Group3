@@ -12,7 +12,6 @@ radio.config(power=7)
 
 display.scroll(channel)
 
-# Event loop.
 while True:
     radio.send("Attempting link")
     dataRecieved = radio.receive()
