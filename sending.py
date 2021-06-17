@@ -5,7 +5,7 @@ from microbit import *
 import radio
 import random
 
-channel = random.randrange(1,100,0)
+channel = random.randrange(1,82,0)
 radio.on()
 radio.config(channel=channel)
 radio.config(power=7)
